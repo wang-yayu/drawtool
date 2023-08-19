@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<calculator>
+	<num>
+		<function>accept and display the input numbers from the keys</function>
+		<input_parament>(interger): the number enterrd by the keys</input_parament>
+		<return_parament>none</return_parament>
+	</num>
+	<clear>
+		<function>clear the sceen</function>
+		<input_parament>(interger): the number enterrd by the keys</input_parament>
+		<return_parament>none</return_parament>
+	</clear>
+	<back>
+		<function>delete the the last 2 bit characters</function>
+		<input_parament>none</input_parament>
+		<return_parament>none</return_parament>
+	</back>
+	<calculate>
+		<function>calculate the correct formula and report the error one's message</function>
+		<input_parament>none</input_parament>
+		<return_parament>none</return_parament>
+	</calculate>
+	<save>
+		<function>save calculation records in the file</function>
+		<input_parament>(string): the formula</input_parament>
+		<return_parament>none</return_parament>
+	</save>
+	<show>
+		<function>show calculation records line by line</function>
+		<input_parament>none</input_parament>
+		<return_parament>none</return_parament>
+	</show>
+	<char>
+		<function>accept and display the input mathematical notations from the keys</function>
+		<input_parament>(character): the mathematical notation entered by the keys</input_parament>
+		<return_parament>none</return_parament>
+	</char>
+</calculator>
