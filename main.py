@@ -6,20 +6,31 @@ win.title("计算器")
 filename = 'record.txt'
 
 def num(a):
+  """accept and display the input numbers from the keys
+
+  Args:
+      a (interger): the number enterrd by the keys
+  """ 
   val=result.get()
   result.delete(0,END)
   result.insert(0,val + a)
 
 def clear():
+  """clear the sceen
+  """
   result.delete(0,END)
 
 def back():
+   """delete the the last 2 bit characters
+  """ 
   val=result.get()
   if(len(val)):
     result.delete(len(val)-2,END)
     result.config(text=val[0:len(val)-2])
 
 def calculate():
+  """calculate the correct formula and report the error one's message
+  """ 
   expression =result.get()
   try:
     res = eval(expression)
@@ -33,6 +44,11 @@ def calculate():
     result.insert(0, "Error")
 
 def save(lst):
+  """save calculation records in the file
+
+  Args:
+      lst (string): the formula
+  """ 
     try:
       stu_write = open(filename, 'a', encoding='UTF-8')
     except:
@@ -42,6 +58,8 @@ def save(lst):
     stu_write.close()
 
 def show():
+  """show calculation records line by line
+  """
   if os.path.exists(filename):
     with open(filename, 'r', encoding='UTF-8') as r_file:
       stu = r_file.readlines()  # 打开文件并逐行读取内容
@@ -49,6 +67,11 @@ def show():
 
 
 def char(a):
+  """accept and display the input mathematical notations from the keys
+
+  Args:
+      a (character): the mathematical notation entered by the keys
+  """ 
   val = result.get()
   result.delete(0, END)
   result.insert(0, val + a)
