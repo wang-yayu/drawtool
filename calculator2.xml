@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<calculator>
+	<num>
+		<summary>accept and display the input numbers from the keys</summary>
+		<param>(interger): the number enterrd by the keys</param>
+		<returns>none</returns>
+	</num>
+	<clear>
+		<summary>clear the sceen</summary>
+		<param>none</param>
+		<returns>none</returns>
+	</clear>
+	<back>
+		<summary>delete the the last 2 bit characters</summary>
+		<param>none</param>
+		<returns>none</returns>
+	</back>
+	<calculate>
+		<summary>calculate the correct formula and report the error one's message</summary>
+		<param>none</param>
+		<returns>none</returns>
+	</calculate>
+	<save>
+		<summary>save calculation records in the file</summary>
+		<param>(string): the formula</param>
+		<returns>none</returns>
+	</save>
+	<show>
+		<summary>show calculation records line by line</summary>
+		<param>none</param>
+		<returns>none</returns>
+	</show>
+	<char>
+		<summary>accept and display the input mathematical notations from the keys</summary>
+		<param>(character): the mathematical notation entered by the keys</param>
+		<returns>none</returns>
+	</char>
+</calculator>
