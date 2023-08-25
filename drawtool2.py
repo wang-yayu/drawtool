@@ -20,6 +20,7 @@ app.title('画图')
 x = 1200
 y = 800
 center_window(x, y)
+app.geometry("1200x800+0+0")
 
 yesno = tkinter.IntVar(value=0)
 what = tkinter.IntVar(value=1)
@@ -37,18 +38,19 @@ end = [0]
 
 
 current_color=['#000000'] #用于储存当前选中的颜色
-thickness=30 #默认画笔粗细为3
+thickness=1 #默认画笔粗细为1
 foreColor=current_color
 def getter(widget):
     time.sleep(0.5)
-    x = app.winfo_x() + widget.winfo_x()
+    x = app.winfo_x() + widget.winfo_x()+15
     y = app.winfo_y() + widget.winfo_y()
     if app.winfo_x() < 0:
         x = 0
     if app.winfo_y() < 0:
         y = 0
-    x1 = x + widget.winfo_width() + 200
-    y1 = y + widget.winfo_height() + 200
+    x1 = x + widget.winfo_screenwidth() +200
+    y1 = y + widget.winfo_screenheight() +200
+
     filename = tkinter.filedialog.asksaveasfilename(filetypes=[('.jpg', 'JPG')],
                                                     initialdir='C:\\Users\\lin042\\Desktop\\')
     ImageGrab.grab().crop((x, y, x1, y1)).save(filename)
@@ -59,7 +61,7 @@ def onLeftButtonDown(event):
     X.set(event.x)
     Y.set(event.y)
     if what.get() == 4:
-        canvas.create_text(event.x, event.y, font=("等线", int(thickness)), text=text, fill=foreColor)
+        canvas.create_text(event.x, event.y, font=("等线", int(size)), text=text, fill=foreColor,width=thickness)
         what.set(1)
 
 
@@ -70,7 +72,7 @@ def onLeftButtonMove(event):
     if what.get() == 1:
 
         lastDraw = canvas.create_line(X.get(), Y.get(), event.x, event.y,
-                                      fill=foreColor)
+                                      fill=foreColor,width=thickness)
         X.set(event.x)
         Y.set(event.y)
     elif what.get() == 2:
@@ -80,7 +82,7 @@ def onLeftButtonMove(event):
             pass
 
         lastDraw = canvas.create_line(X.get(), Y.get(), event.x, event.y,
-                                      fill=foreColor)
+                                      fill=foreColor,width=thickness)
     elif what.get() == 3:
 
         try:
@@ -88,12 +90,12 @@ def onLeftButtonMove(event):
         except Exception:
             pass
         lastDraw = canvas.create_rectangle(X.get(), Y.get(), event.x, event.y,
-                                           outline=foreColor)
+                                           outline=foreColor,width=thickness)
 
     elif what.get() == 5:
 
         lastDraw = canvas.create_rectangle(event.x - 10, event.y - 10, event.x + 10, event.y + 10,
-                                           outline=backColor)
+                                           outline=backColor,width=thickness)
     elif what.get() == 6:
 
         try:
@@ -101,20 +103,20 @@ def onLeftButtonMove(event):
         except Exception:
             pass
         lastDraw = canvas.create_oval(X.get(), Y.get(), event.x, event.y,
-                                      fill=backColor, outline=foreColor)
+                                      fill=backColor, outline=foreColor,width=thickness)
 
 
 def onLeftButtonUp(event):
     global lastDraw
     if what.get() == 2:
 
-        lastDraw = canvas.create_line(X.get(), Y.get(), event.x, event.y, fill=foreColor)
+        lastDraw = canvas.create_line(X.get(), Y.get(), event.x, event.y, fill=foreColor,width=thickness)
     elif what.get() == 3:
 
-        lastDraw = canvas.create_rectangle(X.get(), Y.get(), event.x, event.y, outline=foreColor)
+        lastDraw = canvas.create_rectangle(X.get(), Y.get(), event.x, event.y, outline=foreColor,width=thickness)
     elif what.get() == 6:
 
-        lastDraw = canvas.create_oval(X.get(), Y.get(), event.x, event.y, outline=foreColor)
+        lastDraw = canvas.create_oval(X.get(), Y.get(), event.x, event.y, outline=foreColor,width=thickness)
     yesno.set(0)
     end.append(lastDraw)
 
@@ -203,16 +205,12 @@ def chooseColor():
     s = colorchooser.askcolor(color="black", title="选择画笔颜色")  # 返回一个tuple,index为1时为颜色的十六进制值
     current_color[0] = s[1]
 
-def savethickness(scale):
-    global thickness
-    thickness=scale
-    print(thickness)
-def chooseThickness():
 
-   top=tkinter.Toplevel()
-   top.geometry("150x150")
-   scale=tkinter.Scale(top,from_=20,to=50,resolution=1,orient="horizontal").pack()
-   but=tkinter.Button(top,text='确定',font=20,command=savethickness(scale)).place(width=50,height=40,x=40,y=100)
+def chooseThickness():
+        global thickness
+        thickness = tkinter.simpledialog.askinteger('输入画笔粗细', prompt='', initialvalue=1)
+        if thickness is None:
+                thickness = "1"
 
 
 menuType.add_command(label='铅笔', command=drawCurve)
